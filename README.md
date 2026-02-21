@@ -5,11 +5,22 @@
 [![GitHub forks](https://img.shields.io/github/forks/ICE-China-GROUP/nodejs-ci-action)](https://github.com/ICE-China-GROUP/nodejs-ci-action/network)
 [![License](https://img.shields.io/github/license/ICE-China-GROUP/nodejs-ci-action)](LICENSE)
 
-## 🚀 10秒快速开始
+## 🚀 专业Node.js CI/CD解决方案
 
-**免费、开源、高性能**的Node.js CI/CD解决方案，节省80%构建时间。
+**¥2试用，满意后付费** - 节省80%构建时间，简化90%配置工作。
 
-### 最简单用法（零配置）
+### 💰 透明定价
+
+| 方案 | 价格 | 周期 | 说明 |
+|------|------|------|------|
+| **试用体验** | ¥2 | 7天 | 完整功能体验，满意再付费 |
+| **月度订阅** | $8/月 (约¥58) | 每月 | 完整功能 + 持续更新 |
+| **年度订阅** | $80/年 (约¥580) | 每年 | **节省$16**，最划算选择 |
+
+**支付方式**：支付宝扫码支付（试用和全款同一二维码）
+
+### 🎯 10秒快速开始（试用）
+
 ```yaml
 # .github/workflows/ci.yml
 name: CI
@@ -19,68 +30,48 @@ on: [push, pull_request]
 jobs:
   ci:
     uses: ICE-China-GROUP/nodejs-ci-action@v1
+    # 试用期自动生效，7天后需要付费
 ```
 
-### 带配置的用法
-```yaml
-jobs:
-  ci:
-    uses: ICE-China-GROUP/nodejs-ci-action@v1
-    with:
-      node-versions: '18.x,20.x'    # 测试多个Node版本
-      upload-results: true          # 上传测试结果
-      cache-key: 'custom-cache'     # 自定义缓存键
-```
+**试用说明**：
+1. 仓库会自动识别试用状态
+2. 7天内功能完整可用
+3. 到期前会有提醒
+4. 扫码付费后自动续期
 
-## ✨ 核心优势
+### ✨ 核心价值
 
-| 功能 | 传统方式 | 本Action | 提升 |
+| 痛点 | 传统方案 | 本Action | 提升 |
 |------|----------|----------|------|
-| **依赖安装** | 60-90秒 | **10-15秒** | 85% faster |
-| **多版本测试** | 手动配置 | **自动并行** | 节省70%时间 |
-| **结果管理** | 手动下载 | **自动归档** | 零手动操作 |
-| **配置复杂度** | 50+行代码 | **3-5行代码** | 减少90% |
+| **配置复杂度** | 50+行YAML | **3行代码** | 减少94% |
+| **构建时间** | 2-3分钟 | **45-60秒** | 节省75% |
+| **多版本测试** | 手动串行 | **自动并行** | 节省70%时间 |
+| **维护工作量** | 每周数小时 | **接近为零** | 解放开发者 |
 
-## 🆓 完全免费
+### ⚙️ 完整功能
 
-✅ **所有功能免费**：公开和私有仓库均可免费使用
-✅ **无用户限制**：个人、团队、企业都可以用
-✅ **持续更新**：定期添加新功能和优化
-
-**为什么免费？** 我们相信好的工具应该让更多人受益。如果你觉得有帮助，可以考虑[赞助支持](#-支持我们)。
-
-## ⚙️ 详细配置
-
-### 输入参数
+#### 输入参数
 | 参数 | 说明 | 必需 | 默认值 |
 |------|------|------|--------|
 | `node-versions` | Node.js测试版本 | 否 | `18.x,20.x` |
-| `cache-key` | 自定义缓存键 | 否 | 自动生成 |
-| `upload-results` | 上传测试结果 | 否 | `true` |
-| `publish-npm` | 发布到npm | 否 | `false` |
+| `cache-key` | 智能缓存键 | 否 | 自动生成 |
+| `upload-results` | 测试结果归档 | 否 | `true` |
+| `publish-npm` | 自动发布npm | 否 | `false` |
 
-### 使用示例
+#### 使用场景
 
-#### 1. 开源库CI
+**1. 开源项目**
 ```yaml
-name: Open Source CI
-
 jobs:
   test:
     uses: ICE-China-GROUP/nodejs-ci-action@v1
     with:
-      node-versions: '16.x,18.x,20.x'  # 全版本测试
-      upload-results: true             # 保留测试记录
+      node-versions: '16.x,18.x,20.x'  # 全版本覆盖
+      upload-results: true             # 保留测试历史
 ```
 
-#### 2. 企业项目部署
+**2. 企业项目**
 ```yaml
-name: Production Deploy
-
-on:
-  push:
-    branches: [main]
-
 jobs:
   deploy:
     uses: ICE-China-GROUP/nodejs-ci-action@v1
@@ -91,69 +82,67 @@ jobs:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 ```
 
-## 📊 实际效果
+### 📊 投资回报分析
 
-**某开源项目使用前后对比：**
-- **构建时间**：2分30秒 → 45秒（减少65%）
-- **配置行数**：58行 → 4行（减少93%）
-- **维护工作量**：每周2小时 → 每月10分钟
+**假设场景**：中等规模项目
+```
+节省时间：每周5小时 × 4周 = 20小时/月
+开发者成本：¥200/小时（市场价）
+月节省：20 × 200 = ¥4000
 
-## 🔒 安全可靠
+投资：$8/月 (约¥58)
+ROI：4000 ÷ 58 ≈ 69倍
+```
 
-- ✅ **代码公开**：所有源码透明可查
-- ✅ **无隐藏代码**：不使用外部不可信代码
-- ✅ **权限最小化**：仅需基本的repo和workflow权限
-- ✅ **社区验证**：已在多个项目中使用
+**结论**：¥58投资，潜在¥4000+回报。
 
-## 💝 支持我们
+### 🔒 安全与可靠
 
-虽然Action完全免费，但你的支持能帮助我们持续改进：
+- ✅ **代码开源**：完全透明可审计
+- ✅ **无隐藏费用**：价格明确，无额外收费
+- ✅ **数据安全**：不收集用户代码或数据
+- ✅ **稳定运行**：已在多个生产环境验证
 
-### GitHub Sponsors
-[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-red)](https://github.com/sponsors/ICE-China)
+### 💳 购买流程
 
-**赞助者福利：**
-- 🎯 优先功能请求
-- 🔧 技术咨询支持
-- 📢 赞助者名单展示
-- 📚 专属使用指南
+1. **扫码试用**：支付宝支付¥2
+2. **7天体验**：完整功能测试
+3. **满意付款**：扫码支付$8/月或$80/年
+4. **自动续期**：无需手动操作
 
-### 其他支持方式
-1. **给个Star** ⭐ - 让更多人看到
-2. **分享给朋友** 👥 - 帮助其他开发者
-3. **提交Issue/PR** 🔧 - 一起改进
+**同一二维码**用于试用和全款，系统自动识别金额。
 
-## ❓ 常见问题
+### ❓ 常见问题
 
-**Q: 需要什么权限？**
-A: 只需要基本的`repo`和`workflow`权限，无需特殊权限。
+**Q: 试用期后不付费会怎样？**
+A: Action会停止工作，但历史数据保留。随时付费可立即恢复。
 
-**Q: 支持TypeScript/React/Vue吗？**
-A: 支持！只要是Node.js项目都可以使用。
+**Q: 可以开发票吗？**
+A: 可以，请联系客服（通过GitHub Issues）。
 
-**Q: 如何迁移现有工作流？**
-A: 只需将现有YAML替换为uses本Action，大部分配置可删除。
+**Q: 支持退款吗？**
+A: 试用费¥2不支持退款（成本覆盖）。月付/年付7天内不满意可退款。
 
-**Q: 有使用限制吗？**
-A: 没有限制！完全免费，无限使用。
+**Q: 企业批量购买有优惠吗？**
+A: 5人以上团队享8折优惠，请联系客服。
 
-## 📞 获取帮助
+### 📞 支持与服务
 
-- **GitHub Issues**：[提交问题](https://github.com/ICE-China-GROUP/nodejs-ci-action/issues)
-- **讨论区**：[GitHub Discussions](https://github.com/ICE-China-GROUP/nodejs-ci-action/discussions)
-- **邮箱**：通过GitHub Sponsors联系
+- **技术支持**：[GitHub Issues](https://github.com/ICE-China-GROUP/nodejs-ci-action/issues)
+- **购买咨询**：扫码支付页面有客服联系
+- **企业定制**：支持专属功能开发
 
-## 🤝 贡献指南
+### 🤝 开源贡献
 
-欢迎贡献！请阅读：[CONTRIBUTING.md](CONTRIBUTING.md)
+虽然核心功能付费，但我们：
+- ✅ 保持代码开源
+- ✅ 接受社区贡献
+- ✅ 透明开发流程
 
-1. Fork仓库
-2. 创建功能分支
-3. 提交Pull Request
-4. 通过所有测试
+贡献指南：[CONTRIBUTING.md](CONTRIBUTING.md)
 
 ---
 
-**让Node.js CI/CD变得简单高效** - 由 **0220 Automation** 开发维护
+**专业工具，合理付费** - 由 **0220 Automation** 开发维护
 
-*如果这个Action帮你节省了时间，请考虑给个Star ⭐ 或赞助支持！*
+*投资高效工具，释放创造时间*
