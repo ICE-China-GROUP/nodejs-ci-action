@@ -1,0 +1,84 @@
+name: 'Node.js CI/CD Enhanced'
+description: 'Enhanced CI/CD workflow for Node.js projects with testing, building, and publishing'
+author: '0220 Automation'
+branding:
+  icon: 'package'
+  color: 'blue'
+inputs:
+  node-versions:
+    description: 'Node.js versions to test against (comma-separated)'
+    required: false
+    default: '18.x,20.x'
+  run-tests:
+    description: 'Whether to run tests'
+    required: false
+    default: 'true'
+  run-build:
+    description: 'Whether to run build'
+    required: false
+    default: 'true'
+  publish-npm:
+    description: 'Whether to publish to npm'
+    required: false
+    default: 'false'
+  cache-key:
+    description: 'Custom cache key'
+    required: false
+    default: 'node-modules-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}'
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version-file: '.nvmrc'
+        cache: 'npm'
+
+    - name: Cache dependencies
+      uses: actions/cache@v4
+      with:
+        path: ~/.npm
+        key: ${{ inputs.cache-key }}
+        restore-keys: |
+          node-modules-${{ runner.os }}-
+
+    - name: Install dependencies
+      shell: bash
+      run: npm ci
+
+    - name: Run linting
+      if: ${{ inputs.run-tests == 'true' }}
+      shell: bash
+      run: npm run lint --if-present
+
+    - name: Run tests
+      if: ${{ inputs.run-tests == 'true' }}
+      shell: bash
+      run: npm test
+
+    - name: Run build
+      if: ${{ inputs.run-build == 'true' }}
+      shell: bash
+      run: npm run build --if-present
+
+    - name: Upload test results
+      if: always() && ${{ inputs.run-tests == 'true' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: test-results
+        path: |
+          coverage/
+          test-results.xml
+          junit.xml
+
+    - name: Publish to npm
+      if: ${{ inputs.publish-npm == 'true' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      shell: bash
+      run: |
+        echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+        npm publish
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
